@@ -157,12 +157,13 @@ main {
 }
 
 .player--winner {
+  transition: 0.2s linear;
   background-color: #2f2f2f;
 }
 
 .player--winner .name {
   font-weight: 700;
-  color: #c7365f;
+  color: #96fc28;
 }
 
 .hidden {

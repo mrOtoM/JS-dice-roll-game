@@ -19,6 +19,7 @@ diceElement.classList.add('hidden');
 const scoresMain = [0, 0];
 let currentScore = 0;
 let activePlayer = 0;
+let isPlaying = true;
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -30,22 +31,38 @@ const switchPlayer = function () {
 
 //Rolling dice function - click on BUTTON
 btnRoll.addEventListener('click', function () {
-  const rollDice = Math.trunc(Math.random() * 6) + 1;
-  diceElement.classList.remove('hidden');
-  diceElement.src = `dice-${rollDice}.png`;
+  if (isPlaying) {
+    const rollDice = Math.trunc(Math.random() * 6) + 1;
+    diceElement.classList.remove('hidden');
+    diceElement.src = `dice-${rollDice}.png`;
 
-  if (rollDice !== 1) {
-    currentScore += rollDice;
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentScore;
-  } else {
-    switchPlayer();
+    if (rollDice !== 1) {
+      currentScore += rollDice;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      switchPlayer();
+    }
   }
 });
 
+// Button HOLD
 btnHold.addEventListener('click', function () {
   scoresMain[activePlayer] += currentScore;
   document.getElementById(`score--${activePlayer}`).textContent =
     scoresMain[activePlayer];
-  switchPlayer();
+
+  // chceck score is above 100 ?
+  if (scoresMain[activePlayer] >= 10) {
+    isPlaying = false;
+    diceElement.classList.add('hidden');
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.add('player--winner');
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.remove('player--active');
+  } else {
+    switchPlayer();
+  }
 });
