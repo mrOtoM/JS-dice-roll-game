@@ -2,6 +2,8 @@
 
 # The main goal of this game is reach 100 point as first
 
+Easy JavaScript game
+
 Game Logic:
 
 1. Every time when you press ROLL DICE button you get random number 
