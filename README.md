@@ -2,7 +2,7 @@
 
 # The main goal of this game is reach 100 point as first
 
-Easy JavaScript game
+- Easy JavaScript game
 
 Game Logic:
 
