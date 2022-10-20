@@ -10,16 +10,30 @@ const current1Element = document.querySelector('#current--1');
 const diceElement = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
+const btnNew = document.querySelector('.btn--new');
+
+let scoresMain, currentScore, activePlayer, isPlaying;
 
 // Starting conditions
-score0Element.textContent = 0;
-score1Element.textContent = 0;
-diceElement.classList.add('hidden');
+const newGame = function () {
+  scoresMain = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  isPlaying = true;
 
-const scoresMain = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let isPlaying = true;
+  score0Element.textContent = 0;
+  score1Element.textContent = 0;
+  current0Element.textContent = 0;
+  current1Element.textContent = 0;
+
+  diceElement.classList.add('hidden');
+  player0Element.classList.remove('player--winner');
+  player1Element.classList.remove('player--winner');
+  player0Element.classList.add('player--active');
+  player1Element.classList.remove('player--active');
+};
+
+newGame();
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -53,7 +67,7 @@ btnHold.addEventListener('click', function () {
     scoresMain[activePlayer];
 
   // chceck score is above 100 ?
-  if (scoresMain[activePlayer] >= 10) {
+  if (scoresMain[activePlayer] >= 100) {
     isPlaying = false;
     diceElement.classList.add('hidden');
     document
@@ -66,3 +80,6 @@ btnHold.addEventListener('click', function () {
     switchPlayer();
   }
 });
+
+// Button NEW
+btnNew.addEventListener('click', newGame);
